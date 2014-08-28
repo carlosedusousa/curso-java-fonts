@@ -10,10 +10,10 @@ public class OficinaMain {
 
 	public static void main(String[] args) throws SQLException {
 
-		// Criei uma Classe DaoConnect para realizar a conexão.
+		// Classe DaoConnect para realizar a conexão.
 		JDBCConnect conexao = new JDBCConnect();
 		Connection con = conexao.criarConexao();
-		//
+		// Cria o Objeto oficina.
 		DaoOficina oficina = new DaoOficina();
 
 		oficina.addCliente(con, "janjao", "rua zzz", "100000000");

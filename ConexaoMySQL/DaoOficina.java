@@ -6,10 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DaoOficina {
-
-		public void main(String[] args) throws SQLException {
-
-		}
 		
 		// INSERTS
 		public void addCliente(Connection con, String nome, String endereco, String telefone) throws SQLException {
