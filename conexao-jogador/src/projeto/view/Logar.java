@@ -22,6 +22,9 @@ import javax.swing.JCheckBox;
 import projeto.conexao.JDBCConnect;
 import projeto.control.LoginDao;
 import projeto.model.Jogador;
+import javax.swing.JSeparator;
+import java.awt.Component;
+import javax.swing.JList;
 
 /**
  * 
@@ -36,7 +39,6 @@ public class Logar extends JFrame {
 	private JTextField txtSenha;
     private Vector<JCheckBox> testaChks;  
     private Vector<JLabel> titulo;  
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,9 +57,10 @@ public class Logar extends JFrame {
 	 * Create the frame.
 	 */
 	public Logar() {
+		setResizable(false);
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 370, 207);
+		setBounds(100, 100, 349, 222);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -140,32 +143,48 @@ public class Logar extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JPanel panel_titulo = new JPanel();
+		
+		JSeparator separator_2 = new JSeparator();
+		
+		JSeparator separator_1 = new JSeparator();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(89)
-							.addComponent(chckbxCriarJogador))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(10)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 292, Short.MAX_VALUE)))
-					.addContainerGap(29, Short.MAX_VALUE))
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_titulo, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(201, Short.MAX_VALUE))
+					.addContainerGap(190, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(10, Short.MAX_VALUE)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE)))
+					.addGap(36))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(chckbxCriarJogador)
+						.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 298, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(36, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(panel_titulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(13)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
 					.addGap(7)
-					.addComponent(chckbxCriarJogador))
+					.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chckbxCriarJogador)
+					.addGap(16))
 		);
+		gl_contentPane.linkSize(SwingConstants.HORIZONTAL, new Component[] {panel, separator_2, separator_1});
 		
 		JLabel lblTituloJogo = new JLabel("Entrar no Jogo");
 		 titulo = new Vector<JLabel>();  
