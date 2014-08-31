@@ -24,7 +24,6 @@ import projeto.control.LoginDao;
 import projeto.model.Jogador;
 import javax.swing.JSeparator;
 import java.awt.Component;
-import javax.swing.JList;
 
 /**
  * 

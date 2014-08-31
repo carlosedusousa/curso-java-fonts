@@ -11,9 +11,7 @@
  Otavio Ribeiro <otavioribeiro@capflorianopolis.org.br>
 */
 
-package descricao;
-
-import descricao.ConsultaDescNavy;
+package projeto.descricao;
 
 public class ConsultarNavyMain {
 	public static void main(String[] args) {

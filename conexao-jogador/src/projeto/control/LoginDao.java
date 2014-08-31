@@ -7,13 +7,25 @@ import java.sql.SQLException;
 
 public class LoginDao {
 
-	// Realiza login.
+	// Método Log retorna a consulta da tabela loguins.
+	public ResultSet log (Connection con)throws SQLException {
+
+		String sql = "SELECT * FROM logins";
+
+		PreparedStatement preparedStatement = con.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
+		// retorna a consulta.
+		return rs;
+	}
+	
+	// Método que retorna verdadeiro ou falso para realização do login.
 	public boolean login(Connection con, String usuario, String senha)
 			throws SQLException {
 
 		String sql = "SELECT * FROM logins WHERE usuario LIKE ? AND senha LIKE ?";
 
 		PreparedStatement preparedStatement = con.prepareStatement(sql);
+		// Usuário e senha são validados sem espços e o usuário indifere de maiúsculo e minúsculo.
 		preparedStatement.setString(1, usuario.toLowerCase().replaceAll("\\s+",""));
 		preparedStatement.setString(2, senha.replaceAll("\\s+",""));
 
@@ -21,11 +33,14 @@ public class LoginDao {
 
 		if (rs.next()) {
 			System.out.println("Loguin Efetuado com sucesso!");
+			// Retorna verdadeiro se a consulta for true.
 			return true;
 		}
+		// Retorna falso se a consulta for false.
 		return false;
 	}
 
+	// Método que valida se já existe registro com nome a ser criado.
 	public boolean verificaNome(Connection con, String usuario)
 			throws SQLException {
 
@@ -36,12 +51,15 @@ public class LoginDao {
 		ResultSet rs = preparedStatement.executeQuery();
 		while (rs.next()) {
 			if (rs.getString("usuario").equalsIgnoreCase(usuario.toLowerCase().replaceAll("\\s+",""))) {
+				// Retorna verdadeiro se a consulta for true.
 				return true;
 			}
 		}
+		// Retorna falso se a consulta for false.
 		return false;
 	}
 
+	// Método que valida senha.
 	public boolean verificaSenha(Connection con, String senha)
 			throws SQLException {
 
@@ -52,9 +70,11 @@ public class LoginDao {
 		ResultSet rs = preparedStatement.executeQuery();
 		while (rs.next()) {
 			if (rs.getString("senha").equalsIgnoreCase(senha)) {
+				// Retorna verdadeiro se a consulta for true.
 				return true;
 			}
 		}
+		// Retorna falso se a consulta for false.
 		return false;
 	}
 
@@ -62,6 +82,7 @@ public class LoginDao {
 	public boolean addLogin(Connection con, String usuario, String senha)
 			throws SQLException {
 
+		// Valida nome primeiramente. Cria um novo se o dado não existir no banco.
 		if (!verificaNome(con, usuario)) {
 
 			String insertSQL = "INSERT INTO logins (usuario, senha) VALUES (?,?)";

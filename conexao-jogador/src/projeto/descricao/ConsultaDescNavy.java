@@ -11,7 +11,7 @@
  Otavio Ribeiro <otavioribeiro@capflorianopolis.org.br>
 */
 
-package descricao;
+package projeto.descricao;
 
 import java.io.BufferedReader;
 import java.io.File;
