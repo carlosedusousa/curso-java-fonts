@@ -8,13 +8,28 @@ import java.sql.SQLException;
 public class LoginDao {
 
 	// Método Log retorna a consulta da tabela loguins.
-	public ResultSet log (Connection con)throws SQLException {
-
-		String sql = "SELECT * FROM logins";
-
+	public ResultSet log (Connection con, String valor)throws SQLException {
+		// Complementa o SQL com a clausula where se valor vir com parametro.
+		String values;
+		// Verifica complemento.
+		if(valor.equals("")){
+			values = "";
+		}else{
+			values = " WHERE senha LIKE ? OR usuario LIKE ?";
+		}
+		// Monta a query.
+		String sql = "SELECT * FROM logins" + values;
+		
 		PreparedStatement preparedStatement = con.prepareStatement(sql);
+		// Se há complemento de consulta é complementado o ? com os valores respectivos.
+		if(!valor.equals("")){
+			// Usuário e senha são validados sem espços e o usuário indifere de maiúsculo e minúsculo.
+			preparedStatement.setString(1, "%" + valor.replaceAll("\\s+","") + "%");
+			preparedStatement.setString(2, "%" + valor.toLowerCase().replaceAll("\\s+","") + "%");
+		}
+		// Executa query.
 		ResultSet rs = preparedStatement.executeQuery();
-		// retorna a consulta.
+		// retorna a consulta ResultSet.
 		return rs;
 	}
 	
@@ -89,6 +104,7 @@ public class LoginDao {
 
 			PreparedStatement preparedStatement = con
 					.prepareStatement(insertSQL);
+			// Usuário e senha são validados sem espços e o usuário indifere de maiúsculo e minúsculo.
 			preparedStatement.setString(1, usuario.toLowerCase().replaceAll("\\s+",""));
 			preparedStatement.setString(2, senha.replaceAll("\\s+",""));
 			preparedStatement.executeUpdate();

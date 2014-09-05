@@ -28,6 +28,6 @@ public class MainTeste {
 			// Realiza login do usuário.
 			l.login(con, eduardo.getUsuario(), eduardo.getSenha());
 			// Consulta todos os usuários e senhas no banco.
-			l.log(con);
+			l.log(con,"cAr");
 		}
 }
