@@ -1,0 +1,49 @@
+#--DROP DATABASE testes;
+#--CREATE DATABASE testes;
+#--USE testes;
+
+#Pacientes	
+CREATE TABLE pacientes (
+id INT AUTO_INCREMENT,
+nome VARCHAR(200),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+num_beneficio VARCHAR(20),
+PRIMARY KEY(id)
+);
+INSERT INTO pacientes () VALUES (1,"AAA","Floripa","999999","beneficio001");
+INSERT INTO pacientes () VALUES (2,"BBB","Palhoca","555555","beneficio001");
+INSERT INTO pacientes () VALUES (3,"CCC","biguacu","222222","beneficio001");
+INSERT INTO pacientes () VALUES (4,"DDD","Sao Joao","777777","beneficio001");
+INSERT INTO pacientes () VALUES (5,"EEE","Floripa","111111","beneficio001");
+INSERT INTO pacientes () VALUES (6,"FFF","Palhoca","000000","beneficio001");
+INSERT INTO pacientes () VALUES (7,"GGG","Sao Joao","444444","beneficio001");
+INSERT INTO pacientes () VALUES (8,"HHH","Floripa","333333","beneficio001");
+INSERT INTO pacientes () VALUES (9,"III","Palhoca","496236753","beneficio001");
+INSERT INTO pacientes () VALUES (10,"JJJ","Sao Joao","sdnbobn","beneficio001");
+
+CREATE TABLE medicos (
+id INT AUTO_INCREMENT,
+nome VARCHAR(200),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+especialidade VARCHAR(100),
+PRIMARY KEY(id)
+);
+INSERT INTO medicos () VALUES (1,"DR AAA","Sao Joao","4352345423","Gino");
+INSERT INTO medicos () VALUES (2,"DR BBB","Sao Joao","4352426","Cardio");
+INSERT INTO medicos () VALUES (3,"DR CCC","Sao Joao","56566767","Pediatra");
+INSERT INTO medicos () VALUES (4,"DR DDD","Sao Joao","9999999","Gastro");
+
+CREATE TABLE consultas (
+id INT AUTO_INCREMENT,
+medico_id INT NOT NULL,
+paciente_id INT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (medico_id) REFERENCES medicos(id),
+FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
+);
+INSERT INTO consultas () VALUES (1,1,4);
+INSERT INTO consultas () VALUES (2,2,3);
+INSERT INTO consultas () VALUES (3,3,2);
+INSERT INTO consultas () VALUES (4,4,1);

@@ -1,0 +1,25 @@
+- Crie uma classe que possui uma lista das datas comemorativas do mês de Novembro no Brasil (https://pt.wikipedia.org/wiki/Novembro) e imprima cada uma dessas datas no console.
+
+- Entre os anos de 1400 e 2090, adicione todos os anos bissextos em uma lista chamada anosBissextos e depois imprima todos os valores desta lista. (Utilize um objeto do tipo GregorianCalendar para realizar esta verificação)
+
+- Receba um data no teclado no formato dia/mes/ano e imprima no formato ano-mes-dia
+
+-----------------------------------------------------------------------------------
+
+Desenvolva ema classe chamada Vendas com os atributos: Nome, Data (do tipo java.util.Date), Vendas
+Cadastre uma lista indefinida de usuários.
+Para cada dia do mês atual atribua um valor de 0 a 10 para cada um dos usuários.
+Imprima no padrão:
+
+Fulano (49 vendas no total)
+01/01 : ---- 4 vendas
+02/01 : ------ 6 vendas
+03/01 : ---------- 10 vendas
+04/01 : --- 3 vendas
+...
+
+Cricrano (13 vendas no total)
+01/01 : --- 3 vendas
+02/01 : ----- 5 vendas
+02/01 : - 1 venda
+...

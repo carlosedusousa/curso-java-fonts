@@ -1,0 +1,230 @@
+DROP DATABASE testes;
+CREATE DATABASE testes;
+USE testes;
+
+CREATE TABLE login (
+id INT AUTO_INCREMENT NOT NULL,
+senha VARCHAR(50),
+usuario VARCHAR(255),
+PRIMARY KEY (id)
+);
+
+INSERT INTO login () VALUES (1 , "senha" , "usuario");
+SELECT * FROM login;
+
+SELECT * FROM login WHERE senha = "senha" AND usuario = "usuario";
+
+#delete from login;
+
+
+#Biblioteca
+CREATE TABLE autores (
+id INT AUTO_INCREMENT NOT NULL,
+primeiro_nome VARCHAR(50),
+ultimo_nome VARCHAR(50),
+pais VARCHAR(50),
+PRIMARY KEY (id)
+);
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (1, "xexeu", "joaquin" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (2, "romeno", "atum" , "Italia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (3, "jujaijuc", "jokkn" , "China");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (4, "giraia", "xxx" , "Japao");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (5, "joao", "pedro" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (6, "crau", "creu" , "Croacia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (7, "super", "man" , "EUA");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (8, "sasci", "pepere" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (9, "croc", "croc" , "Croassovialactc");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (10, "jassscroc", "csdfroc" , "Croassovialactc");
+
+CREATE TABLE editoras (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+PRIMARY KEY (id)
+);
+INSERT INTO editoras (id, nome) VALUES (1, "KKK");
+INSERT INTO editoras (id, nome) VALUES (2, "XXX");
+INSERT INTO editoras (id, nome) VALUES (3, "AAA");
+INSERT INTO editoras (id, nome) VALUES (4, "BBB");
+INSERT INTO editoras (id, nome) VALUES (5, "CCC");
+INSERT INTO editoras (id, nome) VALUES (6, "DDD");
+INSERT INTO editoras (id, nome) VALUES (7, "EEE");
+INSERT INTO editoras (id, nome) VALUES (8, "FFF");
+INSERT INTO editoras (id, nome) VALUES (9, "GGG");
+INSERT INTO editoras (id, nome) VALUES (10, "HHH");
+
+CREATE TABLE livros (
+id INT AUTO_INCREMENT NOT NULL,
+autor_id INT NOT NULL,
+editora_id INT NOT NULL,
+titulo VARCHAR(100),
+descricao TEXT,
+tipo ENUM('romance','poesia','drama'),
+ano_publicacao VARCHAR(4),
+isbn VARCHAR(20),
+PRIMARY KEY (id),
+FOREIGN KEY (autor_id) REFERENCES autores(id)
+);
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (1,2,3,"1-QATU","aa",'poesia',"1990", "01-911");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (2,6,5,"2-WARS","bb",'romance',"2011", "02-811");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (3,1,10,"3-EAPQ","cc",'drama',"2010", "03-711");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (4,8,9,"4-RANO","dd",'poesia',"1995", "04-611");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (5,3,8,"5-TALM","ee",'drama',"2015", "05-511");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (6,7,6,"6-YAIJ","ff",'romance',"2016", "06-411");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (7,4,4,"7-UAGH","gg",'poesia',"2012", "07-311");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (8,3,2,"8-IADE","hh",'romance',"2013", "08-211");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (9,10,7,"9-OACD","kk",'romance',"2014", "09-111");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (10,1,4,"10-KPAB","hh",'poesia',"1977", "10-011");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (11,3,3,"11-QATU","aa",'drama',"2013", "11-911");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (12,8,5,"12-WARS","bb",'poesia',"1899", "12-811");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (13,6,10,"13-EAPQ","cc",'drama',"2010", "13-711");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (14,8,9,"14-RANO","dd",'romance',"2014", "14-611");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (15,3,8,"15-TALM","ee",'romance',"2000", "15-511");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (16,9,6,"16-YAIJ","ff",'romance',"2016", "16-411");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (17,4,4,"17-UAGH","gg",'drama',"2001", "17-311");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (18,3,2,"18-IADE","hh",'romance',"2013", "18-211");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (19,1,7,"19-ACD","kk",'poesia',"2014", "19-111");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (20,10,4,"20-KPAB","hh",'romance',"2007", "20-011");
+
+CREATE TABLE bibliotecas (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(200),
+endereco VARCHAR(200),
+PRIMARY KEY (id)
+);
+INSERT INTO bibliotecas () VALUES (1, "UFSC","Florianopolis sn");
+INSERT INTO bibliotecas () VALUES (2, "UNIVALI","Chapeco sn");
+INSERT INTO bibliotecas () VALUES (3, "UDESC","Joinville sn");
+
+
+CREATE TABLE bibliotecas_livros (
+biblioteca_id INT NOT NULL,
+livro_id INT NOT NULL,
+PRIMARY KEY (biblioteca_id, livro_id),
+FOREIGN KEY (biblioteca_id) REFERENCES bibliotecas(id),
+FOREIGN KEY (livro_id) REFERENCES livros(id)
+);
+
+SELECT * FROM bibliotecas_livros;
+
+INSERT INTO bibliotecas_livros () VALUES (1,1);
+INSERT INTO bibliotecas_livros () VALUES (2,2);
+INSERT INTO bibliotecas_livros () VALUES (3,3);
+INSERT INTO bibliotecas_livros () VALUES (1,4);
+INSERT INTO bibliotecas_livros () VALUES (2,5);
+INSERT INTO bibliotecas_livros () VALUES (3,6);
+INSERT INTO bibliotecas_livros () VALUES (1,7);
+INSERT INTO bibliotecas_livros () VALUES (2,8);
+INSERT INTO bibliotecas_livros () VALUES (3,9);
+INSERT INTO bibliotecas_livros () VALUES (1,10);
+INSERT INTO bibliotecas_livros () VALUES (2,11);
+INSERT INTO bibliotecas_livros () VALUES (3,12);
+INSERT INTO bibliotecas_livros () VALUES (1,13);
+INSERT INTO bibliotecas_livros () VALUES (2,14);
+INSERT INTO bibliotecas_livros () VALUES (3,15);
+INSERT INTO bibliotecas_livros () VALUES (1,16);
+INSERT INTO bibliotecas_livros () VALUES (2,17);
+INSERT INTO bibliotecas_livros () VALUES (3,18);
+INSERT INTO bibliotecas_livros () VALUES (1,19);
+INSERT INTO bibliotecas_livros () VALUES (2,20);
+
+#1 seleciona tudo da tabela autores.
+SELECT primeiro_nome, ultimo_nome, pais FROM autores;
+SELECT * FROM autores;
+
+#2 seleciona tudo da tabela editoras.
+SELECT nome, criado_em FROM editoras;
+SELECT * FROM editoras,livros;
+
+SELECT * FROM livros;
+
+#3 seleciona tudo da tabela livros.
+SELECT titulo, descricao, tipo FROM livros;
+
+#4 seleciona tudo de bibliotecas.
+SELECT * FROM bibliotecas;
+
+#5 seleciona tudo de bibliotecas_livros.
+SELECT * FROM  bibliotecas_livros;
+
+#6 seleciona nome do autor, nome do livro e nome da editora relacionadas.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro ,e.nome as editora FROM	autores a, livros l, editoras e WHERE l.autor_id = a.id AND l.editora_id = e.id;
+
+#7 seleciona nome do autor, nome do livro e nome da editora relacionadas onde o id da editora é 3.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro ,e.nome as editora FROM	autores a, livros l, editoras e WHERE l.autor_id = a.id AND l.editora_id = e.id AND l.editora_id = 3;
+
+#8 seleciona nome do autor, nome do livro e nome da editora relacionadas onde o id da editora é 1.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro ,e.nome as editora FROM	autores a, livros l, editoras e WHERE l.autor_id = a.id AND l.editora_id = e.id AND l.editora_id = 1;
+
+#9 seleciona nome do autor, nome do livro relacionadas onde o id da editora é 1.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro FROM	autores a, livros l WHERE l.autor_id = a.id AND l.editora_id = 1;
+
+#10 seleciona nome do autor, nome do livro relacionadas onde o id da editora é 2.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro FROM	autores a, livros l WHERE l.autor_id = a.id AND l.editora_id = 2;
+
+#11 seleciona nome do autor, nome do livro relacionadas onde o id da editora é 3.
+SELECT	a.primeiro_nome as nome ,l.titulo as livro FROM	autores a, livros l WHERE l.autor_id = a.id AND l.editora_id = 3;
+
+#12 seleciona  nome do livro e nome da editora relacionadas onde o id da editora é 3.
+SELECT	l.titulo as livro ,e.nome as editora FROM	livros l, editoras e WHERE l.editora_id = e.id AND l.editora_id = 3;
+
+#13 seleciona  nome do livro e nome da editora relacionadas onde o id da editora é 2.
+SELECT	l.titulo as livro ,e.nome as editora FROM	livros l, editoras e WHERE l.editora_id = e.id AND l.editora_id = 2;
+
+#14 seleciona  nome do livro e nome da editora relacionadas onde o id da editora é 1.
+SELECT	l.titulo as livro ,e.nome as editora FROM	livros l, editoras e WHERE l.editora_id = e.id AND l.editora_id = 1;
+
+#1 junta todas as informações das tabelas livros com bibliotecas relacionadas apenas com o título e a biblioteca pesquisada.
+SELECT * FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "1-QATU" AND  b.nome = "UDESC" ;
+
+#2 junta todas as informações das tabelas livros com bibliotecas relacionadas buscando um ou outro dado pesquisado.
+SELECT * FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "10-KPAB" OR  b.nome = "UDESC" ;
+
+#3 seleciona o título de 1 livro, mas irá mostrar 3 vezes pois há 3 bibliotecas relacioandas no join das colunas, multiplicando-os. 
+#O resultado traz apenas de um titulo pois o outro não foi relacionado com a biblioteca.
+SELECT l.titulo FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "20-KPAB" OR l.titulo = "4-RANO" ;
+
+#4 não retorna valor pois não holve relacionamento do livro na biblioteca.
+SELECT l.titulo FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "20-KPAB";
+
+#5 Relaciona todos os dados da tabela livros e bibliotecas que posuem relação e une com a tabela 
+SELECT * FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.id = 1;
+
+#6 Relaciona todos os dados da tabela livros e bibliotecas que posuem relação e une com a tabela 
+SELECT * FROM livros l INNER JOIN bibliotecas b LEFT JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "1-QATU" OR l.titulo = "4-RANO" ;
+
+#57 Relaciona todos os dados da tabela livros e bibliotecas que posuem relação e une com a tabela 
+SELECT * FROM livros l INNER JOIN bibliotecas b INNER JOIN bibliotecas_livros bl ON (l.id = bl.livro_id) WHERE l.titulo = "11-QATU" OR l.titulo = "7-UAGH" ;
+
+#8 Relaciona todos os dados da tabela livros e bibliotecas que posuem relação e une com a tabela 
+SELECT b.nome as "Biblioteca",l.titulo as "Livro",a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE a.primeiro_nome = "xexeu";
+
+#9 Relaciona todos os dados da tabelas trazendo em comum o título do livro pesquisado
+SELECT b.nome as "Biblioteca",l.titulo as "Livro",a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE l.titulo = "1-QATU";
+
+#10 Relaciona todos os dados das tabelas trazendo em comum a biblioteca pesquisada.
+SELECT b.nome as "Biblioteca",l.titulo as "Livro",a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE b.nome = "UDESC";
+
+#11 Relaciona todos os dados das tabelas trazendo em comum a biblioteca ou livro pesquisados.
+SELECT b.nome as "Biblioteca",l.titulo as "Livro",a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE b.nome = "UDESC" OR l.titulo = "1-QATU";
+
+#12 Relaciona todos os dados das tabelas trazendo em comum a biblioteca ou livro pesquisados.
+SELECT b.nome as "Biblioteca",l.titulo as "Livro", l.descricao as "Descricao", a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE b.nome = "UDESC" OR l.titulo = "1-QATU";
+
+#13 Relaciona todos os dados das tabelas trazendo em comum os dados da biblioteca, livros e autor  biblioteca ou livro pesquisados.
+SELECT b.nome as "Biblioteca",l.titulo as "Livro", l.descricao as "Descricao", a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id ) WHERE b.nome = "UFSC" AND l.titulo = "1-QATU";
+
+#14 Relaciona todos os dados das tabelas trazendo em comum os dados da biblioteca, livros e editora  biblioteca ou livro pesquisados pelo TÍTULO específico.
+SELECT b.nome as "Biblioteca", l.titulo as "Livro", l.descricao as "Descricao", e.nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN editoras e
+ON (l.id = bl.livro_id AND e.id = l.editora_id AND b.id = bl.biblioteca_id ) WHERE l.titulo = "1-QATU";
+
+#15 Relaciona todos os dados das tabelas trazendo em comum os dados da biblioteca, livros e autor  biblioteca ou livro pesquisados pelo pais BRASIL.
+SELECT b.nome as "Biblioteca",l.titulo as "Livro", l.descricao as "Descricao", a.primeiro_nome as "Autor" FROM livros l JOIN bibliotecas b JOIN bibliotecas_livros bl JOIN autores a JOIN editoras e
+ON (l.id = bl.livro_id AND a.id = l.autor_id AND b.id = bl.biblioteca_id AND e.id = l.editora_id) 
+WHERE a.pais = "Brasil";

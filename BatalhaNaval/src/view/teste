@@ -1,0 +1,49 @@
+   	   												
+		if(valida(nome, senha)){
+			System.out.println("SUCESSO");
+		}else{
+			System.out.println("FRACASSO");
+		}
+		
+		
+	public boolean valida(String nome, String senha){
+		try {
+				JDBCConnect conexao = new JDBCConnect();
+				java.sql.Connection con = conexao.criarConexao();
+				LoginDao logando = new LoginDao();
+				
+				if (logando.login(con, nome, senha)) {
+					System.out.println("LOGIN REALIZADO");
+					return true;
+				
+				} else {
+					System.out.println("LOGIN ERRO");
+					con.close();
+					System.out.println("conexao finalizada.");
+					return false;
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public ResultSet batalha(String nome, String senha){
+		
+		try {
+			JDBCConnect conexao = new JDBCConnect();
+			java.sql.Connection con = conexao.criarConexao();
+			LoginDao logando = new LoginDao();
+			ResultSet rs = logando.batalha(con, nome , senha);
+
+			return rs;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	}

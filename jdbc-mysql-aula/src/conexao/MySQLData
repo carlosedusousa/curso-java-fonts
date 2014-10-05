@@ -1,0 +1,13 @@
+select primeiro_nome, ultimo_nome, pais from autores;
+select nome, criado_em from editoras;
+select titulo, descricao, tipo from livros;
+
+select 
+		a.id as id_autor , a.primeiro_nome as nome , 
+		l.id as id_livro , l.titulo as livro, 
+		e.id as id_editora , e.nome as editora 
+	from 
+		autores a , livros l, editoras e 
+	where 
+		l.autor_id = a.id 
+		and l.editora_id = e.id;

@@ -1,0 +1,90 @@
+CREATE TABLE autores (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(240),
+pais VARCHAR(50),
+PRIMARY KEY (id),
+INDEX(nome(4)),
+INDEX(pais(3))
+);
+
+CREATE TABLE editoras (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+PRIMARY KEY (id),
+INDEX(nome)
+);
+
+CREATE TABLE livros (
+id INT AUTO_INCREMENT NOT NULL,
+editora_id INT NOT NULL,
+titulo VARCHAR(100),
+descricao TEXT,
+tipo ENUM('romance','poesia','drama'),
+ano_publicacao VARCHAR(4),
+isbn VARCHAR(20),
+PRIMARY KEY (id),
+FOREIGN KEY (editora_id) REFERENCES editoras(id),
+INDEX(titulo),
+INDEX(descricao),
+INDEX(tipo),
+INDEX(ano_publicacao),
+INDEX(isbn),
+);
+
+CREATE TABLE bibliotecas (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(200),
+endereco VARCHAR(200),
+PRIMARY KEY (id),
+INDEX(nome),
+INDEX(endereco)
+);
+
+CREATE TABLE logins (
+id INT AUTO_INCREMENT,
+usuario VARCHAR(200),
+senha VARCHAR(255),
+PRIMARY KEY(id),
+INDEX (usuario),
+INDEX (senha)
+);
+
+CREATE TABLE clientes (
+id INT AUTO_INCREMENT,
+nome VARCHAR(255),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+PRIMARY KEY(id),
+INDEX (nome),
+INDEX (endereco),
+INDEX (telefone)
+);
+
+CREATE TABLE pecas(
+id INT AUTO_INCREMENT,
+designacao VARCHAR(255),
+custo DECIMAL(10, 3),
+estoque INT,
+PRIMARY KEY(id),
+INDEX (designacao)
+);
+
+CREATE TABLE funcionarios(
+id INT AUTO_INCREMENT,
+nome VARCHAR(255),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+categoria_id INT,
+PRIMARY KEY(id),
+INDEX (nome),
+INDEX (endereco),
+INDEX (telefone)
+);
+
+CREATE TABLE categorias(
+id INT AUTO_INCREMENT,
+nome VARCHAR(255),
+custo_hora DECIMAL(10, 3),
+PRIMARY KEY(id),
+INDEX (nome)
+);

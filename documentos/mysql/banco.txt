@@ -1,0 +1,318 @@
+#MySQL: comandos básicos
+#-----------------------
+#Como conectar ao MySQL
+#Conecte-se ao servidor MySQL com o seguinte comando:
+#mysql -h NOME-DO-SERVIDOR -u NOME-DO-USUARIO
+#Após dar o comando, o sistema vai pedir a sua senha de usuário.
+#Dica: Se você instalou o MySQL no seu próprio PC, pode usar localhost no lugar de
+#NOME-DO-SERVIDOR.
+#No exemplo, a seguir, veja como se conectar como root:
+#mysql -u root -p
+#Se não foi você quem fez a instalação, pode precisar contatar o administrador do banco de
+#dados para saber que valores usar para conectar ao servidor MySQL.
+#-------------------------
+#Como criar um banco de dados no MySQL
+#CREATE DATABASE nome-do-banco;
+
+#Alterar senha mysql.
+#UPDATE mysql.user SET Password=PASSWORD('root') WHERE User='root' AND Host='localhost';
+#FLUSH PRIVILEGES;
+#JAVA http://books.zkoss.org/wiki/Setup_MySQL_DB_in_Eclipse
+C:\Program Files\Java\jre7\bin
+C:\Users\cadu\Documents\CURSOJAVA\DatabaseTools\mysql-connector-java-5.1.32
+
+C:\> configure CLASSPATH=\path\to\mysql-connector-java-5.1.32;%CLASSPATH%
+
+java -classpath C:\Users\cadu\Documents\CURSOJAVA\DatabaseTools\mysql-connector-java-5.1.32/mysql-connector-java-5.1.32-bin
+
+
+
+CREATE DATABASE testes;
+DROP DATABASE testes;
+CREATE DATABASE testes;
+USE testes;
+
+
+
+CREATE TABLE autores (
+id INT AUTO_INCREMENT NOT NULL,
+primeiro_nome VARCHAR(50),
+ultimo_nome VARCHAR(50),
+pais VARCHAR(50),
+PRIMARY KEY (id)
+) ENGINE=INNODB;
+CREATE TABLE editoras (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+PRIMARY KEY (id)
+) ENGINE=INNODB;
+
+CREATE TABLE livros (
+id INT AUTO_INCREMENT NOT NULL,
+autor_id INT NOT NULL,
+editora_id INT NOT NULL,
+titulo VARCHAR(100),
+descricao TEXT,
+tipo ENUM('romance','poesia','drama'),
+ano_publicacao VARCHAR(4),
+isbn VARCHAR(20),
+PRIMARY KEY (id),
+FOREIGN KEY (autor_id) REFERENCES autores(id)
+) ENGINE=INNODB;
+
+# Adicionando FK depois da tabela ter sido criada
+ALTER TABLE livros ADD FOREIGN KEY (editora_id) REFERENCES editoras(id);Para ver todos os bancos de dados existentes no servidor:
+SHOW DATABASES;
+#Usando um banco de dados existente:
+#USE nome-do-banco;
+USE testes;
+#-------------------------
+#Como criar uma tabela no MySQL
+#USE testes; # Defini a tabela a ser utilizada
+# cria uma tabela clientes
+
+CREATE TABLE clientes (
+id mediumint(8) unsigned NOT NULL auto_increment,
+nomeEmpresa varchar(255),
+nomeDiretor varchar(255) default NULL,
+numEmpregados mediumint default NULL,
+PRIMARY KEY (id)) AUTO_INCREMENT=1;
+#Data Types: https://dev.mysql.com/doc/refman/5.0/en/data-types.html
+#Ver as tabelas da base de dados
+SHOW tables;
+#Obter informações da tabela
+DESCRIBE clientes;
+#-------------------------
+#Inserindo dados na base de dados
+
+INSERT INTO `clientes` (`id`,`nomeEmpresa`,`nomeDiretor`,`numEmpregados`)
+VALUES (1,"Malesuada Inc.","Johnny Pedd",4847);
+INSERT INTO `clientes` (`nomeEmpresa`,`nomeDiretor`,`numEmpregados`)
+VALUES ("Aliquam Inc.","Al Capino",4135);
+INSERT INTO `clientes` (`nomeEmpresa`)
+VALUES ("Geração Tec");
+INSERT INTO `clientes` (`nomeDiretor`,`numEmpregados`)
+VALUES ("Al Capino",4135);
+#-------------------------
+#Fazendo consulta em todos os dados
+SELECT * FROM clientes;
+SELECT nomeEmpresa FROM clientes;
+SELECT id, nomeEmpresa FROM clientes;
+SELECT id, nomeEmpresa FROM clientes WHERE id=2;
+SELECT id, nomeEmpresa FROM clientes WHERE id<>2;
+#=================================================
+#Novamente (com extras)
+CREATE TABLE livros (
+livro_id INT,
+titulo VARCHAR(50),
+autor VARCHAR(50)
+);
+ALTER TABLE livros
+CHANGE COLUMN livro_id livro_id INT AUTO_INCREMENT PRIMARY KEY,
+CHANGE COLUMN autor autor_id INT,
+ADD COLUMN descricao TEXT,
+ADD COLUMN tipo ENUM('romance','poesia','drama'),
+ADD COLUMN editora_id INT,
+ADD COLUMN ano_publicacao VARCHAR(4),
+ADD COLUMN isbn VARCHAR(20);
+
+CREATE TABLE autores (
+autor_id INT AUTO_INCREMENT PRIMARY KEY,
+primeiro_nome VARCHAR(50),
+ultimo_nome VARCHAR(50),
+pais VARCHAR(50)
+);
+
+SHOW TABLES;
+# Insira 10 livros;
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (1,"A", 1,"A", 'romance', 9, "2013", "11");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (2, "B", 2, "B", 'drama', 8, "2011", "22");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (3, "C", 4, "C", 'romance', 7, "2012", "33");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (4, "D", 3, "D", 'romance', 6, "2014", "44");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (5, "E", 5, "E", 'drama', 5, "2013", "55");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (6, "F", 8, "F", 'poesia', 4, "2014", "66");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (7, "G", 9, "G", 'romance', 3, "2013", "77");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (8, "H",10, "H", 'drama', 2, "2013", "88");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (9,"I", 6, "I", 'poesia', 1, "2010", "99");
+INSERT INTO livros (livro_id, titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao, isbn ) VALUES (10,"J", 7, "J", 'drama', 0, "2010", "00");
+
+# Insira 10 autores;
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (1, "xexeu", "joaquin" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (2, "romeno", "atum" , "Italia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (3, "jujaijuc", "jokkn" , "China");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (4, "giraia", "xxx" , "Japão");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (5, "joao", "pedro" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (6, "crau", "creu" , "Croacia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (7, "super", "man" , "EUA");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (8, "sasci", "pepere" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (9, "croc", "croc" , "Croassóvialactc");
+
+
+# Escreva 20 consultas diferentes utilizando estes livros e autores
+select * from livros;
+select livro_id from livros;
+select livro_id, titulo from livros;
+select livro_id, titulo ,autor_id, from livros;
+select titulo ,descricao, isbn from livros;
+select livro_id, titulo ,autor_id, descricao, tipo from livros;
+select livro_id, titulo ,autor_id, descricao, tipo, editora_id from livros;
+select titulo ,autor_id, descricao, tipo, editora_id, ano_publicacao  from livros;
+select livro_id, titulo ,autor_id, descricao, isbn from livros;
+select livro_id, titulo ,autor_id, ano_publicacao, isbn from livros;
+select titulo , descricao, tipo, editora_id, ano_publicacao, isbn from livros where isbn = 00;
+select * from autores;
+select autor_id, primeiro_nome, ultimo_nome, pais from autores; 
+select primeiro_nome, ultimo_nome, pais from autores; 
+select autor_id, primeiro_nome, ultimo_nome, pais from autores; 
+select autor_id, primeiro_nome, pais from autores; 
+select autor_id, primeiro_nome, ultimo_nome, pais from autores; 
+select autor_id, primeiro_nome from autores; 
+select ultimo_nome, pais from autores; 
+
+
+#Crie tabelas que reflitam as classes (do GT):
+#oo.humano
+
+CREATE TABLE humanos(
+humano_id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(50),
+idade INT,
+morto BOOL NOT NULL DEFAULT '0'
+);
+
+
+#oo.estatico.exercicios.Conta
+
+CREATE TABLE contas(
+conta_id INT AUTO_INCREMENT PRIMARY KEY,
+numContas INT NOT NULL,
+identificador INT NOT NULL,
+saldo DOUBLE,
+limite DOUBLE,
+nome VARCHAR(50) NOT NULL
+);
+
+#oo.jogo.heroi (sem utilizar mais de uma tabela)
+
+CREATE TABLE herois(
+nome VARCHAR(50) NOT NULL,
+posicaoX INT,
+posicaoY INT,
+vida INT,
+ataque BOOL NOT NULL DEFAULT '0',
+defesa BOOL NOT NULL DEFAULT '0',
+superVelocidade BOOL NOT NULL DEFAULT '0'
+);
+
+#Crie 5 inserts para cada uma;
+INSERT INTO humanos (humano_id, nome, idade, morto) VALUES (1, "Giraia", 12, TRUE);
+INSERT INTO humanos (humano_id, nome, idade, morto) VALUES (2, "jaspon", 12, FALSE);
+INSERT INTO humanos (humano_id, nome, idade, morto) VALUES (3, "megaX", 12, TRUE);
+INSERT INTO humanos (humano_id, nome, idade, morto) VALUES (4, "pica-pau", 12, FALSE);
+INSERT INTO humanos (humano_id, nome, idade, morto) VALUES (5, "tom", 12, TRUE);
+
+INSERT INTO contas (conta_id, numContas, identificador, saldo , limite, nome) VALUES (1, 1,1,11.0,10000.0,"Carlos");
+INSERT INTO contas (conta_id, numContas, identificador, saldo , limite, nome) VALUES (2, 13,1,811.0,10000.0,"Eduardo");
+INSERT INTO contas (conta_id, numContas, identificador, saldo , limite, nome) VALUES (3, 15,1,8111.0,10000.0,"Pedro");
+INSERT INTO contas (conta_id, numContas, identificador, saldo , limite, nome) VALUES (4, 17,1,1911.0,10000.0,"Ricardo");
+INSERT INTO contas (conta_id, numContas, identificador, saldo , limite, nome) VALUES (5, 19,1,11091.0,10000.0,"Joao");
+
+INSERT INTO herois(nome, posicaoX, posicaoY, vida, ataque, defesa,superVelocidade) VALUES ("GIRAIA", 1, 1, 123, 0, 0 , 0);
+INSERT INTO herois(nome, posicaoX, posicaoY, vida, ataque, defesa,superVelocidade) VALUES ("MEGAX", 1, 1, 123, 0, 0 , 0);
+INSERT INTO herois(nome, posicaoX, posicaoY, vida, ataque, defesa,superVelocidade) VALUES ("TOM", 1, 1, 123, 0, 0 , 0);
+INSERT INTO herois(nome, posicaoX, posicaoY, vida, ataque, defesa,superVelocidade) VALUES ("LANTERNA VERDE", 1, 1, 123, 0, 0 , 0);
+INSERT INTO herois(nome, posicaoX, posicaoY, vida, ataque, defesa,superVelocidade) VALUES ("XMEN", 1, 1, 123, 0, 0 , 0);
+
+
+#Crie 3 selects especificos para cada;
+
+SELECT conta_id, numContas, identificador, saldo , limite, nome FROM contas;
+SELECT identificador, saldo , limite, nome FROM contas;
+SELECT numContas, identificador, saldo nome FROM contas;
+
+SELECT humano_id, nome, idade, morto FROM humanos;
+SELECT nome, idade, morto FROM humanos;
+SELECT humano_id, nome morto FROM humanos;
+
+SELECT nome, posicaoX, posicaoY, vida, ataque, defesa FROM herois;
+SELECT nome, posicaoX, posicaoY, vida, superVelocidade FROM herois;
+SELECT nome, vida, ataque, defesa,superVelocidade FROM herois;
+
+DROP DATABASE testes;
+CREATE DATABASE testes;
+USE testes;
+
+CREATE TABLE autores (
+id INT AUTO_INCREMENT NOT NULL,
+primeiro_nome VARCHAR(50),
+ultimo_nome VARCHAR(50),
+pais VARCHAR(50),
+PRIMARY KEY (id)
+) ENGINE=INNODB;
+
+CREATE TABLE editoras (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+PRIMARY KEY (id)
+) ENGINE=INNODB;
+
+CREATE TABLE livros (
+id INT AUTO_INCREMENT NOT NULL,
+autor_id INT NOT NULL,
+editora_id INT NOT NULL,
+titulo VARCHAR(100),
+descricao TEXT,
+tipo ENUM('romance','poesia','drama'),
+ano_publicacao VARCHAR(4),
+isbn VARCHAR(20),
+PRIMARY KEY (id),
+FOREIGN KEY (autor_id) REFERENCES autores(id)
+) ENGINE=INNODB;
+# Adicionando FK depois da tabela ter sido criada
+ALTER TABLE livros ADD FOREIGN KEY (editora_id) REFERENCES editoras(id);
+
+# INSIRA A INFORMAÇÃO DE 5 livros completos, 3 autores e 2 editoras que se relacionam
+# dica insira começe a inserir os dados de trás para frente.
+
+
+INSERT INTO editoras (id, nome) VALUES (1, "KKK");
+INSERT INTO editoras (id, nome) VALUES (2, "XXX");
+INSERT INTO editoras (id, nome) VALUES (3, "AAA");
+INSERT INTO editoras (id, nome) VALUES (4, "BBB");
+INSERT INTO editoras (id, nome) VALUES (5, "CCC");
+INSERT INTO editoras (id, nome) VALUES (6, "DDD");
+INSERT INTO editoras (id, nome) VALUES (7, "EEE");
+INSERT INTO editoras (id, nome) VALUES (8, "FFF");
+INSERT INTO editoras (id, nome) VALUES (9, "GGG");
+INSERT INTO editoras (id, nome) VALUES (10, "HHH");
+
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (1, "xexeu", "joaquin" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (2, "romeno", "atum" , "Italia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (3, "jujaijuc", "jokkn" , "China");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (4, "giraia", "xxx" , "Japão");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (5, "joao", "pedro" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (6, "crau", "creu" , "Croacia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (7, "super", "man" , "EUA");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (8, "sasci", "pepere" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (9, "croc", "croc" , "Croassovialactc");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (10, "jassscroc", "csdfroc" , "Croassovialactc");
+
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (1,2,3,"QATU","aa",'romance',"2013", "911");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (2,6,5,"WARS","bb",'romance',"2011", "811");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (3,1,10,"EAPQ","cc",'romance',"2010", "711");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (4,8,9,"RANO","dd",'romance',"2014", "611");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (5,3,8,"TALM","ee",'romance',"2015", "511");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (6,7,6,"YAIJ","ff",'romance',"2016", "411");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (7,4,4,"UAGH","gg",'romance',"2012", "311");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (8,3,2,"IADE","hh",'romance',"2013", "211");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (9,10,7,"OACD","kk",'romance',"2014", "111");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (10,9,4,"KPAB","hh",'romance',"2010", "011");
+
+
+select primeiro_nome, ultimo_nome, pais from autores;
+select nome, criado_em from editoras;
+select titulo, descricao, tipo from livros;
+
+select a.primeiro_nome as nome , l.titulo as livro , e.nome as editora from autores a , livros l, editoras e where l.autor_id = a.id and l.editora_id = e.id;

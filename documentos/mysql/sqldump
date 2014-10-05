@@ -1,0 +1,139 @@
+DROP DATABASE testes;
+CREATE DATABASE testes;
+USE testes;
+
+CREATE TABLE autores (
+id INT AUTO_INCREMENT NOT NULL,
+primeiro_nome VARCHAR(50),
+ultimo_nome VARCHAR(50),
+pais VARCHAR(50),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE editoras (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+PRIMARY KEY (id)
+);
+INSERT INTO editoras (id, nome) VALUES (1, "KKK");
+INSERT INTO editoras (id, nome) VALUES (2, "XXX");
+INSERT INTO editoras (id, nome) VALUES (3, "AAA");
+INSERT INTO editoras (id, nome) VALUES (4, "BBB");
+INSERT INTO editoras (id, nome) VALUES (5, "CCC");
+INSERT INTO editoras (id, nome) VALUES (6, "DDD");
+INSERT INTO editoras (id, nome) VALUES (7, "EEE");
+INSERT INTO editoras (id, nome) VALUES (8, "FFF");
+INSERT INTO editoras (id, nome) VALUES (9, "GGG");
+INSERT INTO editoras (id, nome) VALUES (10, "HHH");
+
+
+CREATE TABLE livros (
+id INT AUTO_INCREMENT NOT NULL,
+autor_id INT NOT NULL,
+editora_id INT NOT NULL,
+titulo VARCHAR(100),
+descricao TEXT,
+tipo ENUM('romance','poesia','drama'),
+ano_publicacao VARCHAR(4),
+isbn VARCHAR(20),
+PRIMARY KEY (id),
+FOREIGN KEY (autor_id) REFERENCES autores(id)
+);
+
+CREATE TABLE bibliotecas (
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(200),
+endereco VARCHAR(200),
+PRIMARY KEY (id)
+);
+
+INSERT INTO bibliotecas () VALUES (1, "UFSC","Florianópolis sn");
+INSERT INTO bibliotecas () VALUES (2, "UFSC","Chapecó sn");
+INSERT INTO bibliotecas () VALUES (3, "UFSC","Joinville sn");
+
+CREATE TABLE bibliotecas_livros (
+biblioteca_id INT NOT NULL,
+livro_id INT NOT NULL,
+PRIMARY KEY (biblioteca_id, livro_id),
+FOREIGN KEY (biblioteca_id) REFERENCES bibliotecas(id),
+FOREIGN KEY (livro_id) REFERENCES livros(id)
+);
+
+INSERT INTO bibliotecas_livros () VALUES (1,1);
+INSERT INTO bibliotecas_livros () VALUES (1,2);
+INSERT INTO bibliotecas_livros () VALUES (1,3);
+INSERT INTO bibliotecas_livros () VALUES (2,4);
+INSERT INTO bibliotecas_livros () VALUES (3,5);
+INSERT INTO bibliotecas_livros () VALUES (3,6);
+INSERT INTO bibliotecas_livros () VALUES (2,7);
+INSERT INTO bibliotecas_livros () VALUES (2,8);
+INSERT INTO bibliotecas_livros () VALUES (1,9);
+INSERT INTO bibliotecas_livros () VALUES (3,10);
+
+
+CREATE TABLE pacientes (
+id INT AUTO_INCREMENT,
+nome VARCHAR(200),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+num_beneficio VARCHAR(20),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE medicos (
+id INT AUTO_INCREMENT,
+nome VARCHAR(200),
+endereco VARCHAR(255),
+telefone VARCHAR(12),
+especialidade VARCHAR(100),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE consultas (
+id INT AUTO_INCREMENT,
+medico_id INT NOT NULL,
+paciente_id INT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (medico_id) REFERENCES medicos(id),
+FOREIGN KEY (paciente_id) REFERENCES pacientes(id)
+);
+
+
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (1, "xexeu", "joaquin" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (2, "romeno", "atum" , "Italia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (3, "jujaijuc", "jokkn" , "China");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (4, "giraia", "xxx" , "Japão");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (5, "joao", "pedro" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (6, "crau", "creu" , "Croacia");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (7, "super", "man" , "EUA");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (8, "sasci", "pepere" , "Brasil");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (9, "croc", "croc" , "Croassovialactc");
+INSERT INTO autores (id, primeiro_nome, ultimo_nome, pais) VALUES (10, "jassscroc", "csdfroc" , "Croassovialactc");
+
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (1,2,3,"QATU","aa",'romance',"2013", "911");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (2,6,5,"WARS","bb",'romance',"2011", "811");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (3,1,10,"EAPQ","cc",'romance',"2010", "711");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (4,8,9,"RANO","dd",'romance',"2014", "611");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (5,3,8,"TALM","ee",'romance',"2015", "511");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (6,7,6,"YAIJ","ff",'romance',"2016", "411");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (7,4,4,"UAGH","gg",'romance',"2012", "311");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (8,3,2,"IADE","hh",'romance',"2013", "211");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (9,10,7,"OACD","kk",'romance',"2014", "111");
+INSERT INTO livros (id, autor_id, editora_id, titulo , descricao, tipo, ano_publicacao, isbn ) VALUES (10,9,4,"KPAB","hh",'romance',"2010", "011");
+
+
+
+select primeiro_nome, ultimo_nome, pais from autores;
+select nome, criado_em from editoras;
+select titulo, descricao, tipo from livros;
+
+select 
+	a.primeiro_nome as nome , 
+	l.titulo as livro , 
+	e.nome as editora 
+from 
+	autores a , livros l, editoras e 
+where 
+	l.autor_id = a.id 
+	and l.editora_id = e.id;

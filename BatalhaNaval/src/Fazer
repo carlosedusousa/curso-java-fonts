@@ -1,0 +1,15 @@
+Agilizar o BD com os novos atributos que o Jogador tem, 
+atualmente ele esta assim:
+
+ Atributos do Jogador para o Banco de Dados
+ 
+ String nome
+ int imagem
+ String pais
+ int medalhas
+ int vitorias 
+ ind derrotas
+ int jogos
+ 
+
+Se o DAO com as consultas e inserções estiver na mão amanha vai ser mais tranquilo...
